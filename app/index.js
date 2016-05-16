@@ -1,5 +1,5 @@
 require('./main.css');
 
-var helloWorldHeader = require('./component');
+const helloWorldHeader = require('./component');
 
 document.body.appendChild(helloWorldHeader());
