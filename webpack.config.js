@@ -85,6 +85,8 @@ if (TARGET === 'start' || !TARGET) {
     },
     plugins: [
       new webpack.HotModuleReplacementPlugin(),
+      // This plugin automatically runs `npm install` for any npm modules
+      //   you import
       new NpmInstallPlugin({
         save: true, // like `npm install foo --save`
       }),
