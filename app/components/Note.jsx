@@ -1,3 +1,3 @@
 import React from 'react';
 
-export default () => <div>The Note component is here</div>;
+export default () => <div>REACT HOT MODULE REPLACEMENT MUCH WOW VERY AMAZE</div>;
