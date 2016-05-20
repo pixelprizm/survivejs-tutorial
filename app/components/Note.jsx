@@ -18,7 +18,6 @@ export default class Note extends React.Component {
     return this.renderNote();
   }
 
-  @autobind
   renderEdit() {
     // We deal with blur and input handlers here. These map to DOM events.
     // We also set selection to input end using a callback at a ref.
