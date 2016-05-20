@@ -9,7 +9,7 @@ export default ({notes}) => {
         <li key={note.id}>
           <Note
             task={note.task}
-            style={(Math.floor(Math.random() * 2) === 0) ? null : {color: 'black'}}
+            style={(Math.floor(Math.random() * 2) === 0) ? {} : {color: 'black'}}
           />
         </li>
       )}
