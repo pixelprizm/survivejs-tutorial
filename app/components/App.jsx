@@ -1,5 +1,8 @@
-import uuid from 'node-uuid';
+import autobind from 'autobind-decorator'
 import React from 'react';
+import uuid from 'node-uuid';
+
+import Notes from './Notes';
 
 export default class App extends React.Component {
 
@@ -34,25 +37,30 @@ export default class App extends React.Component {
     return (
       <div>
         <button onClick={this.addNote}>+</button>
-        <ul>{notes.map(note =>
-          <li key={note.id}>[{note.task}]</li>
-        )}</ul>
+        <Notes notes={notes}/>
       </div>
     );
   }
 
-  // We are using an experimental feature known as property
+  // We could use an experimental feature known as property
   // initializer here. It allows us to bind the method `this`
   // to point at our *App* instance.
+  // addNote = () => {
+  //   ...
+  // };
   //
   // Alternatively we could `bind` at `constructor` using
   // a line, such as this.addNote = this.addNote.bind(this);
-  addNote = () => {
+  //
+  // Note: example of using autobind-decorator
+  @autobind
+  addNote() {
     // It would be possible to write this in an imperative style.
     // I.e., through `this.state.notes.push` and then
     // `this.setState({notes: this.state.notes})` to commit.
     //
-    // I tend to favor functional style whenever that makes sense.
+    // I (the tutorial writer) tend to favor functional style whenever that
+    //   makes sense.
     // Even though it might take more code sometimes, I feel
     // the benefits (easy to reason about, no side effects)
     // more than make up for it.
@@ -61,8 +69,16 @@ export default class App extends React.Component {
     this.setState({
       notes: this.state.notes.concat([{
         id: uuid.v4(),
-        task: 'New tasks'
-      }])
+        task: 'New task',
+      }]),
     });
-  };
+
+    // // Could do this instead:
+    // this.setState({
+    //   notes: [...this.state.notes, {
+    //     id: uuid.v4(),
+    //     task: 'New task',
+    //   }],
+    // });
+  }
 }
