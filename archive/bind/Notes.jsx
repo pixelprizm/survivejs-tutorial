@@ -13,9 +13,9 @@ export default ({notes, onEdit, onDelete}) => {
   //   `this.props.onEdit(value)`.
 
   return (
-    <ul className="notes">
+    <ul>
       {notes.map(note =>
-        <li className="note" key={note.id}>
+        <li key={note.id}>
           <Note
             task={note.task}
             style={(Math.floor(Math.random() * 2) === 0) ? {} : {color: 'black'}}

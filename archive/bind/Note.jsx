@@ -11,9 +11,6 @@ export default class Note extends React.Component {
   }
 
   render() {
-    // note that this.renderEdit and this.renderNote don't need @autobind
-    //   because those functions aren't stored in any variables.
-
     if (this.state.editing) {
       return this.renderEdit();
     }
@@ -48,23 +45,7 @@ export default class Note extends React.Component {
   }
 
   renderNote() {
-    const onDelete = this.props.onDelete;
-
-    return (
-      <div onClick={this.edit}>
-        <span className="task">{this.props.task}</span>
-        {onDelete ? this.renderDeleteButton() : null}
-      </div>
-    );
-  }
-
-  renderDeleteButton() {
-    return <button
-      className="delete-note"
-      onClick={this.props.onDelete}
-    >
-      x
-    </button>;
+    return <div onClick={this.edit}>{this.props.task}</div>
   }
 
   @autobind
@@ -103,3 +84,6 @@ export default class Note extends React.Component {
     });
   }
 }
+
+// Note that if we do this, `style` is NOT passed down to the div.
+// export default ({style, task, ...props}) => <div {...props}>{task} {style.color}</div>;
