@@ -1,15 +1,30 @@
+import autobind from 'autobind-decorator'
 import React from 'react';
 
-import connectStateToStore from '../libs/connect-state-to-store';
 import NoteActions from '../actions/NoteActions';
 import Notes from './Notes';
 import NoteStore from '../stores/NoteStore';
 
-@connectStateToStore(NoteStore, 'noteStore')
 export default class App extends React.Component {
 
   constructor(props) {
     super(props);
+
+    this.state = {
+      noteStore: NoteStore.getState(),
+    };
+  }
+
+  componentDidMount() {
+    NoteStore.listen(this.handleStoreChanged);
+  }
+  componentWillUnmount() {
+    NoteStore.unlisten(this.handleStoreChanged);
+  }
+
+  @autobind
+  handleStoreChanged(storeState) {
+    this.setState({noteStore: storeState});
   }
 
   render() {
