@@ -1,11 +1,11 @@
 import React from 'react';
 
-import connectStateToStore from '../libs/connect-state-to-store';
-import NoteActions from '../actions/NoteActions';
-import Notes from './Notes';
-import NoteStore from '../stores/NoteStore';
+import connectStateToStore from '../libs/connectStateToStore';
+import LaneActions from '../actions/LaneActions';
+import Lanes from './Lanes';
+import LaneStore from '../stores/LaneStore';
 
-@connectStateToStore(NoteStore, 'noteStore')
+@connectStateToStore(LaneStore, 'laneStore')
 export default class App extends React.Component {
 
   constructor(props) {
@@ -13,44 +13,23 @@ export default class App extends React.Component {
   }
 
   render() {
-    const notes = this.state.noteStore.notes;
+    const lanes = this.state.laneStore.lanes;
 
     return (
       <div>
         <button
-          className="add-note"
-          onClick={this.addNote}
+          className="add-lane"
+          onClick={this.addLane}
         >
           +
         </button>
 
-        <Notes
-          notes={notes}
-          onEdit={this.editNote}
-          onDelete={this.deleteNote}
-        />
+        <Lanes lanes={lanes}/>
       </div>
     );
   }
 
-  // Note that now that we're using stores, we don't need @autobind any more.
-  addNote() {
-    NoteActions.create({task: 'New task'});
-  }
-
-  editNote(id, task) {
-    // Don't do anything if trying to set an empty value
-    if(!task.trim()) {
-      return;
-    }
-
-    NoteActions.update({id, task});
-  }
-
-  deleteNote(id, e) {
-    // Avoid bubbling the event to edit
-    e.stopPropagation();
-
-    NoteActions.delete(id);
+  addLane() {
+    LaneActions.create('New lane');
   }
 }

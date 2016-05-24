@@ -14,7 +14,7 @@ export default ({notes, onEdit, onDelete}) => {
 
   return (
     <ul className="notes">
-      {notes.map(note =>
+      {notes.map(note =>//TODO use spread operators here, to pass the whole note object as prop
         <li className="note" key={note.id}>
           <Note
             task={note.task}
