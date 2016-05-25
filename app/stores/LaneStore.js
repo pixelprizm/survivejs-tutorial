@@ -10,8 +10,8 @@ class LaneStore {
   }
 
   create(laneName) {
-    // note: Could use `instanceof` to check that `lane` is an
-    //   object of a `Lane` class.
+    // note: Could use `instanceof` to mandate that the caller passes in an
+    //   object of a `Lane` class.  Or a type-checker like Flow.
 
     const newLane = {
       name: laneName,
@@ -23,6 +23,24 @@ class LaneStore {
 
     this.setState({
       lanes: lanes.concat(newLane)
+    });
+  }
+
+  update(updatedLane) {
+    const lanes = this.lanes.map(lane => {
+      if(lane.id === updatedLane.id) {
+        return Object.assign({}, lane, updatedLane);
+      }
+
+      return lane;
+    });
+
+    this.setState({lanes});
+  }
+
+  delete(id) {
+    this.setState({
+      lanes: this.lanes.filter(lane => lane.id !== id),
     });
   }
 

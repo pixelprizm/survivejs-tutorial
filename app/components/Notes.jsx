@@ -1,8 +1,8 @@
 import React from 'react';
 
-import Note from './Note';
+import Editable from './Editable';
 
-export default ({notes, onEdit, onDelete}) => {
+export default ({notes, onValueClick, onEdit, onDelete}) => {
   // note: the `style` property below is used to demonstrate the use of spread
   //   syntax (see Note.jsx)
 
@@ -16,9 +16,10 @@ export default ({notes, onEdit, onDelete}) => {
     <ul className="notes">
       {notes.map(note =>//TODO use spread operators here, to pass the whole note object as prop
         <li className="note" key={note.id}>
-          <Note
-            task={note.task}
-            style={(Math.floor(Math.random() * 2) === 0) ? {} : {color: 'black'}}
+          <Editable
+            editing={note.editing}
+            value={note.task}
+            onValueClick={onValueClick.bind(null, note.id)}
             onEdit={onEdit.bind(null, note.id)}
             onDelete={onDelete.bind(null, note.id)}
           />

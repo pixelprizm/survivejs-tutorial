@@ -13,9 +13,7 @@ const makeStoreConnectedComponent = (Component, store, componentStateKey) => (
       this.state[componentStateKey] = store.getState();
     }
 
-    // note: this should be moved to 
     componentWillMount(){
-      // note: manually binding since autobind
       store.listen(this[storeChangedSymbol]);
 
       super.componentWillMount && super.componentWillMount();
